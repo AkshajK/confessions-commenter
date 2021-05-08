@@ -1,0 +1,221 @@
+{
+    "info": "Meme info from the dataset https://www.kaggle.com/dylanwenzlau/imgflip-meme-text-samples-for-top-24-memes ",
+    "memes": [
+        {
+            "id": "181913649",
+            "name": "Drake Hotline Bling",
+            "url": "https://i.imgflip.com/30b1gx.jpg",
+            "width": 1200,
+            "height": 1200,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/181913649"
+        },
+        {
+            "id": "112126428",
+            "name": "Distracted Boyfriend",
+            "url": "https://i.imgflip.com/1ur9b0.jpg",
+            "width": 1200,
+            "height": 800,
+            "box_count": 3,
+            "examples_url": "https://imgflip.com/meme/112126428"
+        },
+        {
+            "id": "87743020",
+            "name": "Two Buttons",
+            "url": "https://i.imgflip.com/1g8my4.jpg",
+            "width": 600,
+            "height": 908,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/87743020"
+        },
+        {
+            "id": "129242436",
+            "name": "Change My Mind",
+            "url": "https://i.imgflip.com/24y43o.jpg",
+            "width": 482,
+            "height": 361,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/129242436"
+        },
+        {
+            "id": "131087935",
+            "name": "Running Away Balloon",
+            "url": "https://i.imgflip.com/261o3j.jpg",
+            "width": 761,
+            "height": 1024,
+            "box_count": 5,
+            "examples_url": "https://imgflip.com/meme/131087935"
+        },
+        {
+            "id": "124822590",
+            "name": "Left Exit 12 Off Ramp",
+            "url": "https://i.imgflip.com/22bdq6.jpg",
+            "width": 804,
+            "height": 767,
+            "box_count": 3,
+            "examples_url": "https://imgflip.com/meme/124822590"
+        },
+        {
+            "id": "217743513",
+            "name": "UNO Draw 25 Cards",
+            "url": "https://i.imgflip.com/3lmzyx.jpg",
+            "width": 500,
+            "height": 494,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/217743513"
+        },
+        {
+            "id": "222403160",
+            "name": "Bernie I Am Once Again Asking For Your Support",
+            "url": "https://i.imgflip.com/3oevdk.jpg",
+            "width": 750,
+            "height": 750,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/222403160"
+        },
+        {
+            "id": "102156234",
+            "name": "Mocking Spongebob",
+            "url": "https://i.imgflip.com/1otk96.jpg",
+            "width": 502,
+            "height": 353,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/102156234"
+        },
+        {
+            "id": "438680",
+            "name": "Batman Slapping Robin",
+            "url": "https://i.imgflip.com/9ehk.jpg",
+            "width": 400,
+            "height": 387,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/438680"
+        },
+        {
+            "id": "93895088",
+            "name": "Expanding Brain",
+            "url": "https://i.imgflip.com/1jwhww.jpg",
+            "width": 857,
+            "height": 1202,
+            "box_count": 4,
+            "examples_url": "https://imgflip.com/meme/93895088"
+        },
+        {
+            "id": "188390779",
+            "name": "Woman Yelling At Cat",
+            "url": "https://i.imgflip.com/345v97.jpg",
+            "width": 680,
+            "height": 438,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/188390779"
+        },
+        {
+            "id": "1035805",
+            "name": "Boardroom Meeting Suggestion",
+            "url": "https://i.imgflip.com/m78d.jpg",
+            "width": 500,
+            "height": 649,
+            "box_count": 4,
+            "examples_url": "https://imgflip.com/meme/1035805"
+        },
+        {
+            "id": "4087833",
+            "name": "Waiting Skeleton",
+            "url": "https://i.imgflip.com/2fm6x.jpg",
+            "width": 298,
+            "height": 403,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/4087833"
+        },
+        {
+            "id": "178591752",
+            "name": "Tuxedo Winnie The Pooh",
+            "url": "https://i.imgflip.com/2ybua0.png",
+            "width": 800,
+            "height": 582,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/178591752"
+        },
+        {
+            "id": "97984",
+            "name": "Disaster Girl",
+            "url": "https://i.imgflip.com/23ls.jpg",
+            "width": 500,
+            "height": 375,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/97984"
+        },
+        {
+            "id": "119139145",
+            "name": "Blank Nut Button",
+            "url": "https://i.imgflip.com/1yxkcp.jpg",
+            "width": 600,
+            "height": 446,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/119139145"
+        },
+        {
+            "id": "114585149",
+            "name": "Inhaling Seagull",
+            "url": "https://i.imgflip.com/1w7ygt.jpg",
+            "width": 1269,
+            "height": 2825,
+            "box_count": 4,
+            "examples_url": "https://imgflip.com/meme/114585149"
+        },
+        {
+            "id": "100777631",
+            "name": "Is This A Pigeon",
+            "url": "https://i.imgflip.com/1o00in.jpg",
+            "width": 1587,
+            "height": 1425,
+            "box_count": 3,
+            "examples_url": "https://imgflip.com/meme/100777631"
+        },
+        {
+            "id": "91538330",
+            "name": "X, X Everywhere",
+            "url": "https://i.imgflip.com/1ihzfe.jpg",
+            "width": 2118,
+            "height": 1440,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/91538330"
+        },
+        {
+            "id": "89370399",
+            "name": "Roll Safe Think About It",
+            "url": "https://i.imgflip.com/1h7in3.jpg",
+            "width": 702,
+            "height": 395,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/89370399"
+        },
+        {
+            "id": "155067746",
+            "name": "Surprised Pikachu",
+            "url": "https://i.imgflip.com/2kbn1e.jpg",
+            "width": 1893,
+            "height": 1893,
+            "box_count": 3,
+            "examples_url": "https://imgflip.com/meme/155067746"
+        },
+        {
+            "id": "124055727",
+            "name": "Y'all Got Any More Of That",
+            "url": "https://i.imgflip.com/21uy0f.jpg",
+            "width": 600,
+            "height": 471,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/124055727"
+        },
+        {
+            "id": "161865971",
+            "name": "Marked Safe From",
+            "url": "https://i.imgflip.com/2odckz.jpg",
+            "width": 618,
+            "height": 499,
+            "box_count": 2,
+            "examples_url": "https://imgflip.com/meme/161865971"
+        }
+    ]
+}
