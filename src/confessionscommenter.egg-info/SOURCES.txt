@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+src/confessions-commenter/__init__.py
+src/confessions-commenter/commandline_utils.py
+src/confessions-commenter/general_utils.py
+src/confessions-commenter/main.py
+src/confessions-commenter/meme_utils.py
+src/confessionscommenter.egg-info/PKG-INFO
+src/confessionscommenter.egg-info/SOURCES.txt
+src/confessionscommenter.egg-info/dependency_links.txt
+src/confessionscommenter.egg-info/top_level.txt
