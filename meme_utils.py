@@ -23,10 +23,14 @@ def save_image_locally(url, filename):
     return 
 
 class MemeGenerator:
-    def __init__(self, username, password, graph=-1):
+    def __init__(self, username, password):
         self.username = username
         self.password = password
         self.api_root = "https://api.imgflip.com"
+    def get_generatable_memes_info(self):
+        with open("./meme_data.json") as f:
+            res = json.load(f)
+        return res
     def get_all_memes(self):
         """Get popular memes from the imgflip api"""
         data = requests.get(f"{self.api_root}/get_memes").json()
@@ -144,14 +148,12 @@ class MemeGenerator:
                 final_texts = final_texts + finished_texts
                 final_texts = sorted(final_texts, key=lambda p: p['score'], reverse=True)
                 return final_texts[0]['text']
-
-
-    def generate_captions(self, meme_id, input_text):      
+    def generate_captions(self, meme_id, input_text, num_boxes):      
         """Uses MaCHinE LEarNiNG to create a caption *hopefully* related to it"""
         #STEP 1: Find an important word (for now lets just try a verb)
-        initial_word = self.get_initial_word_from_text(input_text, method="ntlk_verbs")
-        num_boxes = 4 # for now
+        initial_word = self.get_initial_word_from_text(input_text, method="ntlk_verbs") + " "
         download_model() #Download model if not downloaded already
+        #STEP 2: Generate caption!
         generated_captions = self.predict_meme_text(
             model_path = ".", #should be downloaded in current directory
             template_id = meme_id, 
@@ -162,15 +164,41 @@ class MemeGenerator:
             beam_width = 1, 
             max_output_length = 140
         )
+        print(f"Generated captions: {generated_captions}. Now posting to imgflip.com...")
         captions = generated_captions.split("|")[:-1] #last one is empty
         meme_info = self.create_meme(meme_id, captions)
         return meme_info
 
     
-
+import csv
+import json 
 
 memer = MemeGenerator("mit_meme_creator", "mit_meme_password")
-print(memer.get_all_memes())
+popular = memer.get_all_memes()
 # memer.generate_captions("93895088", "Hello I am working in this thing and I'm excited to grow.")
 # memer.create_meme(93895088, ["Here I'd put real-people confessions", "If I only had one"])
+
+with open("../ml-scripts/meme_text_gen_convnet/train_gena_24_4000.json") as f:
+    data = json.load(f)
+
+all_ids = set()
+
+for _id, caption in data:
+    all_ids.add(_id)
+
+i = 0
+final_info = {
+    "info": "Meme info from the dataset https://www.kaggle.com/dylanwenzlau/imgflip-meme-text-samples-for-top-24-memes ",
+    "memes": []
+}
+for meme in popular:
+    _id = meme['id']
+    if _id in all_ids:
+        final_info['memes'].append({
+            **meme, 
+            'examples_url': f"https://imgflip.com/meme/{_id}"
+        })
+with open("meme_data.json", 'w') as f:
+    json.dump(final_info, f, indent=4)
+
         
