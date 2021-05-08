@@ -4,14 +4,16 @@ import shutil
 import os 
 import random
 
-def download_model(path="./meme_generator_model.h5"):
-    if os.path.exists(path):
+def download_model(model_path="./meme_generator_model.h5", params_path="./params_generator_model.json", meme_data_path="./meme_data.json"):
+    if os.path.exists(model_path) and os.path.exists(params_path) and os.path.exists(meme_data_path):
         # print("You already have downloaded the model!")
         return 
     import gdown
     print("First time! Downloading model. This may take a minute. (will only happen once)")
-    url = "https://drive.google.com/uc?id=19AggyW1LK5ME3NaW4wkygpuki-Cqp8s-"
-    gdown.download(url, path, quiet=False)
+    gdown.download("https://drive.google.com/uc?id=19AggyW1LK5ME3NaW4wkygpuki-Cqp8s-", model_path, quiet=False)
+    gdown.download("https://drive.google.com/uc?id=1Sm_-HBTNGOdSx6QntbAo-_jzGNCxKIdP", params_path , quiet=False)
+    gdown.download("https://drive.google.com/uc?id=1p-VIfl6ALTxdrbjo_OpDFxY6Pe__en0E", meme_data_path, quiet=False)
+
 def save_image_locally(url, filename):
     """Save locally the image created from the data returned """
     # Save the meme locally
