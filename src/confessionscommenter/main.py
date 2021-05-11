@@ -26,12 +26,17 @@ def main():
             ])
         if index == 0:
             generateComments(post)
+            print(f"[bold]Comment copied to clipboard, paste here: {post['link']} [/bold]")
         elif index == 1:
             generatable_memes = memer.get_generatable_memes_info()['memes']
             names = [f"{meme['name']}. See examples at https://imgflip.com/meme/{meme['id']}" for meme in generatable_memes]
             i = options("[#03c6fc]Choose from the meme list:[/#03c6fc]", names)
-            meme_info = memer.generate_captions(generatable_memes[i]['id'], post['message'], generatable_memes[i]['box_count'])
-            print(f"[bold]Posted meme!. See it here: {meme_info['data']['url']}[/bold]")
+            meme_info, copied = memer.generate_captions(generatable_memes[i]['id'], post['message'], generatable_memes[i]['box_count'])
+            if copied:
+                print(f"[bold]Meme copied to clipboard, paste here: {post['link']} [/bold]. You can also find it for download here {meme_info['data']['url']}")
+            else: 
+                print(f"[bold]Couldn't be copied to clipboard. Download it from {meme_info['data']['url']} and post it here {post['link']} [/bold]")
+
         elif index == 2:
             memes = memer.get_popular_memes()
             names = [f"{meme['name']}. See examples at https://imgflip.com/meme/{meme['id']}" for meme in memes]
@@ -42,8 +47,11 @@ def main():
                 print(f"[#03c6fc]Type meme text #{j}[/#03c6fc]: ", end="")   
                 text = input()
                 captions.append(text)
-            meme_link = memer.create_meme(memes[i]['id'], captions)
-            print(f"[bold]Posted meme!. See it here: {meme_link['data']['url']}[/bold]")
+            meme_info, copied = memer.create_meme(memes[i]['id'], captions)
+            if copied:
+                print(f"[bold]Meme copied to clipboard, paste here: {post['link']} [/bold]. You can also find it for download here {meme_info['data']['url']}")
+            else: 
+                print(f"[bold]Couldn't be copied to clipboard. Download it from {meme_info['data']['url']} and post it here {post['link']} [/bold]")
         else:
             pass
 

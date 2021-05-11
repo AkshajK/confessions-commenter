@@ -22,7 +22,6 @@ def generateCommentsGPT2(msg, num=1):
 
 def copyComment(post, comment):
     pyperclip.copy(comment)
-    print(f"[bold]Comment copied to clipboard, paste here: {post['link']} [/bold]")
 
 def getPosts(title='beaverconfessions', pages=5):
     posts = []

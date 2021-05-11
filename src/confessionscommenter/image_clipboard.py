@@ -25,7 +25,7 @@ def copy_meme_to_clipboard(url, remove_local=True):
     directory = "images/"
     local_path = get_temporary_filename(directory)
     save_image_locally(url, local_path)
-    copy_local_image_to_clipboard(local_path)
+    copied = copy_local_image_to_clipboard(local_path)
     if remove_local:
         os.remove(local_path)
     if len([f for f in os.listdir(directory) if not f.startswith(".")]) == 0: #empty directory
@@ -33,11 +33,13 @@ def copy_meme_to_clipboard(url, remove_local=True):
             os.rmdir(directory)
         except:
             print(f"Couldn't remove directory {directory}")
+    return copied
 
 def windows_copy_local_image_to_clipboard(path):
     """
     Copy a jpg image to the clipboard. Windows only. 
     Taken from https://clay-atlas.com/us/blog/2020/10/30/python-en-pillow-screenshot-copy-clipboard/
+    Returns True if it was successfully copied, False otherwise
     """
     system = platform.system()
     assert system == "Windows", "Only can run this clipboard function in Windows OS"
@@ -56,8 +58,10 @@ def windows_copy_local_image_to_clipboard(path):
         clip.SetClipboardData(win32con.CF_DIB, data)
         clip.CloseClipboard()
         print("Copied image to clipboard!")
+        return True
     except:
         print("There was an error while copying the image to the clipboard. You might need to download it yourself. Sorry!")
+        return False
 def copy_local_image_to_clipboard(path):
     system = platform.system()
     if system == "Windows":

@@ -26,8 +26,8 @@ class MemeGenerator:
         }
         created_meme = requests.post(f"{self.api_root}/caption_image", data=data).json()
         if save_to_clipboard:
-            copy_meme_to_clipboard(created_meme['data']['url'])
-        return created_meme
+            copied = copy_meme_to_clipboard(created_meme['data']['url'])
+        return created_meme, copied
     def save_local_meme(self, meme_data, filename):
         """Save locally the image created from the data returned """
         save_image_locally(meme_data['data']['url'], filename)
@@ -50,5 +50,5 @@ class MemeGenerator:
         )
         print(f"Generated captions: {generated_captions}. Now posting to imgflip.com...")
         captions = generated_captions.split("|")[:-1] #last one is empty
-        meme_info = self.create_meme(meme_id, captions, save_to_clipboard)
-        return meme_info
+        meme_info, copied = self.create_meme(meme_id, captions, save_to_clipboard)
+        return meme_info, copied
