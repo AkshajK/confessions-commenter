@@ -20,7 +20,7 @@ def generateCommentsGPT2(msg, num=1):
     text = generator(prompt, max_length=len(prompt.split(" "))+100, num_return_sequences=num)
     return [text[i]['generated_text'][len(prompt):] for i in range(num)]
 
-def copyComment(post, comment): #no need for this function
+def copyComment(post, comment):
     pyperclip.copy(comment)
     print(f"[bold]Comment copied to clipboard, paste here: {post['link']} [/bold]")
 

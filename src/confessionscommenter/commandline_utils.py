@@ -47,8 +47,7 @@ def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
     # comment_link = None
     for i in range(len(comments)):
         if ans ==str(i+1)+"":
-            print(f"[bold]Comment copied to clipboard, paste here: {post['link']} [/bold]")
-            makeCommentFunc(post, comments[i])
+            comment_link = makeCommentFunc(post, comments[i])
             done = True 
     if not done:
         print("Okay, will not comment.")
