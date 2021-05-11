@@ -1,50 +1,54 @@
 import requests
 import urllib 
 import shutil
-
-
+import os
+import json
+from confessionscommenter.api_utils import SHAREAPI
+from confessionscommenter.image_clipboard import copy_meme_to_clipboard, save_image_locally
+share_api = SHAREAPI()
 class MemeGenerator:
-    def __init__(self, username, password, graph=-1):
+    def __init__(self, username="mit_meme_creator", password="mit_meme_password"):
         self.username = username
         self.password = password
-        self.graph = graph
         self.api_root = "https://api.imgflip.com"
-    def get_all_memes(self):
+    def get_generatable_memes_info(self): 
+        return share_api.get_generatable_memes_info()
+    def get_popular_memes(self):
         data = requests.get(f"{self.api_root}/get_memes").json()
         return data['data']['memes']
-    def create_and_post_meme(self, meme_id, post_id, top_text="", bottom_text="", extra_message=""):
-        res = self.create_meme(meme_id, [top_text, bottom_text]) #create meme in the imgflip server
-        local_image = "images/aaaaa.jpg" # TODO: Make it random, different for different pictures
-        res = self.save_local_meme(res, local_image) # race condition?
-        res = self.post_local_meme_facebook(post_id, local_image, extra_message)
-        # print(res)
-        return res
-    def create_meme(self, meme_id, text_list):
-        text_template = {f"text{i}": text for i, text in enumerate(text_list)}
+    def create_meme(self, meme_id, text_list, save_to_clipboard=True):
+        boxes = {f"boxes[{i}][text]": text for i, text in enumerate(text_list)}
         data = {
             'template_id': meme_id, #drake hotline bling
             'username': self.username,
             'password': self.password,
-            **text_template
+            **boxes
         }
         created_meme = requests.post(f"{self.api_root}/caption_image", data=data).json()
+        if save_to_clipboard:
+            copy_meme_to_clipboard(created_meme['data']['url'])
         return created_meme
     def save_local_meme(self, meme_data, filename):
-        # Save the meme locally
-        r = requests.get(meme_data['data']['url'], stream=True)
-        if r.status_code == 200:
-            with open(filename, 'wb') as f:
-                r.raw.decode_content = True
-                shutil.copyfileobj(r.raw, f)
-        return 
-    def post_local_meme_facebook(self, post_id, meme_location, extra_message=""):
-        comment= "here an image should goooo" #this comment will be edited
-        res = self.graph.put_comment(object_id= post_id, message= comment ) #create comment
-        comment_info = self.graph.put_photo( #put an image (and a new comment) in the created comment
-            image=open(meme_location, 'rb'), 
-            album_path=res['id'], 
-            message= extra_message
+        """Save locally the image created from the data returned """
+        save_image_locally(meme_data['data']['url'], filename)
+        return
+    def get_initial_word_from_text(self, text, method):
+        return share_api.get_initial_word_from_text(text, method)
+    def predict_meme_text(self, template_id, num_boxes, init_text = "", beam_width=1, max_output_length=140): #TODO: Should make num_boxes an input, or just infer it from template_id? 
+        return share_api.predict_meme_text(template_id, num_boxes, init_text, beam_width, max_output_length)
+    def generate_captions(self, meme_id, input_text, num_boxes, save_to_clipboard=True):      
+        """Uses MaCHinE LEarNiNG to create a caption *hopefully* related to it"""
+        #STEP 1: Find an important word (for now lets just try a verb)
+        initial_word = self.get_initial_word_from_text(input_text, method="long_words") + " "
+        #STEP 2: Generate caption!
+        generated_captions = self.predict_meme_text(
+            template_id = meme_id, 
+            num_boxes = num_boxes,  
+            init_text = initial_word, 
+            beam_width = 1, 
+            max_output_length = 140
         )
-        story_fbid, comment_id = res['id'].split("_")
-        meme_link = f"https://facebook.com/permalink.php?story_fbid={story_fbid}&id={post_id}&comment_id={comment_id}"
-        return meme_link #link to the fb post
+        print(f"Generated captions: {generated_captions}. Now posting to imgflip.com...")
+        captions = generated_captions.split("|")[:-1] #last one is empty
+        meme_info = self.create_meme(meme_id, captions, save_to_clipboard)
+        return meme_info
