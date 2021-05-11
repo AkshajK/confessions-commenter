@@ -1,4 +1,4 @@
-from general_utils import *
+from confessionscommenter.general_utils import *
 from rich import print
 import shutil
 size = int(shutil.get_terminal_size()[0])

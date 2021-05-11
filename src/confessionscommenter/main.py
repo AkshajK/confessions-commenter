@@ -1,8 +1,8 @@
 import os
 from rich import print
 from rich.console import Console
-from general_utils import *
-from commandline_utils import *
+from confessionscommenter.general_utils import *
+from confessionscommenter.commandline_utils import *
 console = Console()
 def main():
     os.system("clear")
