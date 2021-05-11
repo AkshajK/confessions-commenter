@@ -3,3 +3,4 @@ build/
 dist/
 src/confessionscommenter.egg-info/
 */__pycache__/
+images/
