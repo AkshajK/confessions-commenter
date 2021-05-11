@@ -35,7 +35,7 @@ def choosePost(posts):
     index = options("[bold]Pick a post:[/bold]", choices)
     return index
 
-def generateComments(post, numOptions=5):
+def generateComments(post, numOptions=5, makeCommentFunc=makeComment):
     comments = generateCommentsGPT2(post['message'], num=numOptions)
     for i in range(len(comments)):
         print(f"COMMENT {i+1}: [#03c6fc]{comments[i]}[/#03c6fc]\n----")
@@ -45,8 +45,7 @@ def generateComments(post, numOptions=5):
     comment_link = None
     for i in range(len(comments)):
         if ans ==str(i+1)+"":
-            print(f"Posting comment...")
-            comment_link = makeComment(post, comments[i])
+            comment_link = makeCommentFunc(post, comments[i])
             done = True 
     if not done:
         print("Okay, will not comment.")
