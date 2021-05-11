@@ -1,0 +1,4 @@
+env/
+build/
+src/confessionscommenter.egg-info/
+*/__pycache__/
