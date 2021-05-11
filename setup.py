@@ -26,8 +26,14 @@ setuptools.setup(
         'facebook-scraper',
         'pyperclip',
         'transformers',
-        'tensorflow'
+        'tensorflow',
+        'nltk',
+        'pillow',
+        'pywin32; platform_system=="Windows"'
+
     ],
+    package_data ={"confessionscommenter": ["./meme_data.json"]},
+    # package_data  = [("confessionscommenter", ["src/confessionscommenter/meme_data.json"])],
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.6",
 )
