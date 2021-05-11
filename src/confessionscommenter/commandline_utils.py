@@ -1,6 +1,7 @@
 from confessionscommenter.general_utils import *
 from rich import print
 import shutil
+import pyperclip
 size = int(shutil.get_terminal_size()[0])
 def options(headerText, choices, start=0): 
     print(headerText)
@@ -35,18 +36,19 @@ def choosePost(posts):
     index = options("[bold]Pick a post:[/bold]", choices)
     return index
 
-def generateComments(post, numOptions=5):
+def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
     comments = generateCommentsGPT2(post['message'], num=numOptions)
+    # comments = generateCommentsGPT2(post['comment'], num=numOptions)
     for i in range(len(comments)):
         print(f"COMMENT {i+1}: [#03c6fc]{comments[i]}[/#03c6fc]\n----")
     print(f"Which comment to post? (respond number or NO)")
     ans = input()
     done = False 
-    comment_link = None
+    # comment_link = None
     for i in range(len(comments)):
         if ans ==str(i+1)+"":
-            print(f"Posting comment...")
-            comment_link = makeComment(post, comments[i])
+            print(f"[bold]Comment copied to clipboard, paste here: {post['link']} [/bold]")
+            makeCommentFunc(post, comments[i])
             done = True 
     if not done:
         print("Okay, will not comment.")
