@@ -35,7 +35,7 @@ def choosePost(posts):
     index = options("[bold]Pick a post:[/bold]", choices)
     return index
 
-def generateComments(post, numOptions=5, makeCommentFunc=makeComment):
+def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
     comments = generateCommentsGPT2(post['message'], num=numOptions)
     for i in range(len(comments)):
         print(f"COMMENT {i+1}: [#03c6fc]{comments[i]}[/#03c6fc]\n----")
