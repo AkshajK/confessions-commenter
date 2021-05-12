@@ -37,8 +37,8 @@ def choosePost(posts):
     return index
 
 def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
+    """Returns generated comment if chose, and None if decided not to comment"""
     comments = generateCommentsGPT2(post['message'], num=numOptions)
-    # comments = generateCommentsGPT2(post['comment'], num=numOptions)
     for i in range(len(comments)):
         print(f"COMMENT {i+1}: [#03c6fc]{comments[i]}[/#03c6fc]\n----")
     print(f"Which comment to post? (respond number or NO)")
@@ -47,7 +47,8 @@ def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
     # comment_link = None
     for i in range(len(comments)):
         if ans ==str(i+1)+"":
-            comment_link = makeCommentFunc(post, comments[i])
+            makeCommentFunc(post, comments[i])
             done = True 
+            return comments[i]
     if not done:
         print("Okay, will not comment.")

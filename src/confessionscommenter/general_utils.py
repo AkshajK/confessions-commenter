@@ -27,7 +27,10 @@ def getPosts(title='beaverconfessions', pages=5):
     posts = []
     for post in get_posts(title, pages=pages):
         new_post = {}
-        new_post['message'] = convert(post['post_text'])
+        if post['post_text'] is None: #sometimes it can return None. facebook-scraper does not guarantee 
+            new_post['message'] = ""
+        else:
+            new_post['message'] = convert(post['post_text'])
         new_post['link'] = post['post_url']
         new_post['id'] = post['post_id']
         posts.append(new_post)
