@@ -2,6 +2,7 @@ import requests
 import urllib 
 import shutil
 import os
+from rich import print
 import json
 from confessionscommenter.api_utils import SHAREAPI
 from confessionscommenter.image_clipboard import copy_meme_to_clipboard, save_image_locally
