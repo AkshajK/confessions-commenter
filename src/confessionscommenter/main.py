@@ -32,7 +32,9 @@ def main():
             names = [f"{meme['name']}. See examples at https://imgflip.com/meme/{meme['id']}" for meme in generatable_memes]
             i = options("[#03c6fc]Choose from the meme list:[/#03c6fc]", names)
             meme_info, copied = memer.generate_captions(generatable_memes[i]['id'], post['message'], generatable_memes[i]['box_count'])
-            if copied:
+            if copied == -1:
+                pass
+            elif copied:
                 print(f"[bold]Meme copied to clipboard, paste here: {post['link']} [/bold]. You can also find it for download here {meme_info['data']['url']}")
             else: 
                 print(f"[bold]Couldn't be copied to clipboard. Download it from {meme_info['data']['url']} and post it here {post['link']} [/bold]")

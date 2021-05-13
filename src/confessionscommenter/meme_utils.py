@@ -48,7 +48,9 @@ class MemeGenerator:
             beam_width = 1, 
             max_output_length = 140
         )
-        print(f"Generated captions: {generated_captions}. Now posting to imgflip.com...")
-        captions = generated_captions.split("|")[:-1] #last one is empty
-        meme_info, copied = self.create_meme(meme_id, captions, save_to_clipboard)
-        return meme_info, copied
+        print(f"Generated captions: {generated_captions}.")
+        if generated_captions !== "Error":
+            captions = generated_captions.split("|")[:-1] #last one is empty
+            meme_info, copied = self.create_meme(meme_id, captions, save_to_clipboard)
+            return meme_info, copied
+        return -1, -1

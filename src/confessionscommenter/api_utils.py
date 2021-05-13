@@ -47,7 +47,9 @@ class SHAREAPI:
         } 
         response = requests.get(f"{self.root_link}/predict", params=params).json()
         # print("Response from api call", response)
-        return response['outputs']
+        if 'outputs' in response:
+            return response['outputs']
+        return 'Error'
 
 if __name__ == '__main__':
     x = SHAREAPI()
