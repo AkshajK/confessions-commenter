@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="confessionscommenter", # Replace with your own username
-    version="0.0.9",
+    version="0.0.10",
     author="Raul Alcantara, Erick Gbordzoe, Akshaj Kadaveru, Sean Elliott, Helen Lu",
     author_email="shareconfessionscommenter@gmail.com",
     description="Autogenerate Comments for Facebook Posts",
