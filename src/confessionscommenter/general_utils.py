@@ -2,23 +2,7 @@ import pyperclip
 from facebook_scraper import get_posts
 import string
 from rich import print
-importedGenerator = False
-generator = -1
-def importModel():
-    global importedGenerator
-    global generator 
-    if not importedGenerator:
-        print("Importing model...")
-        from transformers import pipeline
-        generator = pipeline('text-generation', model='gpt2')
-        importedGenerator = True
-
-def generateCommentsGPT2(msg, num=1):
-    q = msg[(msg.index(" ")+1):]
-    prompt = f"{q}\n RESPONSE: " 
-    importModel()
-    text = generator(prompt, max_length=len(prompt.split(" "))+100, num_return_sequences=num)
-    return [text[i]['generated_text'][len(prompt):] for i in range(num)]
+import sys, os
 
 def copyComment(post, comment):
     pyperclip.copy(comment)
@@ -49,3 +33,8 @@ def convert(input): #From answer https://stackoverflow.com/questions/13101653/py
         return [convert(element) for element in input]
     else: #assumed to be a string
         return sanitize(input)
+
+def blockPrint():
+    sys.stdout = open(os.devnull, 'w')
+def enablePrint():
+    sys.stdout = sys.__stdout__
