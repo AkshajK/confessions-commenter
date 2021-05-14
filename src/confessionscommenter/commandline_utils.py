@@ -40,10 +40,11 @@ def choosePost(posts):
 
 def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
     """Returns generated comment if chose, and None if decided not to comment"""
+    print(f"Generating {numOptions} comments... This might take a minute")
     comments = share_api.generate_gpt2_comments(post['message'], num=numOptions)
     for i in range(len(comments)):
         print(f"COMMENT {i+1}: [#03c6fc]{comments[i]}[/#03c6fc]\n----")
-    print(f"Which comment to post? (respond number or NO)")
+    print(f"Which comment to post? (respond number or NO)", end=" ")
     ans = input()
     done = False 
     # comment_link = None
@@ -54,3 +55,4 @@ def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
             return comments[i]
     if not done:
         print("Okay, will not comment.")
+        return

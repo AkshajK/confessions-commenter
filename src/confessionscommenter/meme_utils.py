@@ -2,6 +2,7 @@ import requests
 import urllib 
 import shutil
 import os
+from rich import print
 import json
 from confessionscommenter.api_utils import SHAREAPI
 from confessionscommenter.image_clipboard import copy_meme_to_clipboard, save_image_locally
@@ -38,6 +39,7 @@ class MemeGenerator:
         return share_api.predict_meme_text(template_id, num_boxes, init_text, beam_width, max_output_length)
     def generate_captions(self, meme_id, input_text, num_boxes, save_to_clipboard=True):      
         """Uses MaCHinE LEarNiNG to create a caption *hopefully* related to it"""
+        print("Generating caption... This might take a minute.")
         #STEP 1: Find an important word (for now lets just try a verb)
         initial_word = self.get_initial_word_from_text(input_text, method="long_words") + " "
         #STEP 2: Generate caption!
@@ -48,7 +50,10 @@ class MemeGenerator:
             beam_width = 1, 
             max_output_length = 140
         )
-        print(f"Generated captions: {generated_captions}. Now posting to imgflip.com...")
-        captions = generated_captions.split("|")[:-1] #last one is empty
-        meme_info, copied = self.create_meme(meme_id, captions, save_to_clipboard)
-        return meme_info, copied
+        print(f"Confession: [#f5a6ff]{input_text}[/#f5a6ff]")
+        print(f"Generated captions: [#03c6fc]{generated_captions}.[/#03c6fc]".replace("||.", ""))
+        if not (generated_captions == "Error"):
+            captions = generated_captions.split("|")[:-1] #last one is empty
+            meme_info, copied = self.create_meme(meme_id, captions, save_to_clipboard)
+            return meme_info, copied
+        return -1, -1

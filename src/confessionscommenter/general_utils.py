@@ -34,7 +34,11 @@ def convert(input): #From answer https://stackoverflow.com/questions/13101653/py
     else: #assumed to be a string
         return sanitize(input)
 
-def blockPrint():
-    sys.stdout = open(os.devnull, 'w')
-def enablePrint():
-    sys.stdout = sys.__stdout__
+#Taken from https://stackoverflow.com/a/45669280/14127936
+class HiddenPrints:
+    def __enter__(self):
+        self._original_stdout = sys.stdout
+        sys.stdout = open(os.devnull, 'w')
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        sys.stdout.close()
+        sys.stdout = self._original_stdout
