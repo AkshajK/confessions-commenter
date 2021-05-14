@@ -1,8 +1,10 @@
 from confessionscommenter.general_utils import *
+from confessionscommenter.api_utils import SHAREAPI
 from rich import print
 import shutil
 import pyperclip
 size = int(shutil.get_terminal_size()[0])
+share_api = SHAREAPI()
 def options(headerText, choices, start=0): 
     print(headerText)
     i = start
@@ -38,7 +40,7 @@ def choosePost(posts):
 
 def generateComments(post, numOptions=5, makeCommentFunc=copyComment):
     """Returns generated comment if chose, and None if decided not to comment"""
-    comments = generateCommentsGPT2(post['message'], num=numOptions)
+    comments = share_api.generate_gpt2_comments(post['message'], num=numOptions)
     for i in range(len(comments)):
         print(f"COMMENT {i+1}: [#03c6fc]{comments[i]}[/#03c6fc]\n----")
     print(f"Which comment to post? (respond number or NO)")
